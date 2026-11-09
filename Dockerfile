@@ -1,16 +1,16 @@
 # Usa uma imagem oficial do Java 17
 FROM eclipse-temurin:17-jdk-jammy
 
-# Define o diretório de trabalho dentro do container
+# Define o diretório de trabalho
 WORKDIR /app
 
-# Copia os arquivos de configuração do Maven de dentro da pasta organizacao-igreja
-COPY organizacao-igreja/.mvn/ .mvn
-COPY organizacao-igreja/mvnw organizacao-igreja/pom.xml ./
+# Copia os arquivos de configuração do Maven usando o nome exato da pasta
+COPY "organização igreja/.mvn/" .mvn/
+COPY "organização igreja/mvnw" "organização igreja/pom.xml" ./
 RUN ./mvnw dependency:go-offline
 
-# Copia todo o código fonte de dentro da pasta organizacao-igreja
-COPY organizacao-igreja/src ./src
+# Copia o código fonte da pasta correta
+COPY "organização igreja/src" ./src
 
 # Compila o projeto gerando o arquivo .jar
 RUN ./mvnw clean package -DskipTests
